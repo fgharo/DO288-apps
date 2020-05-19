@@ -1,0 +1,5 @@
+$ oc new-app --file=quotes-template.yaml \ 
+-p APP_GIT_URL=https://github.com/${RHT_OCP4_GITHUB_USER}/DO288-apps \
+-p PASSWORD=mypass
+
+$ ~/poplate-db.sh
