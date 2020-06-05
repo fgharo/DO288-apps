@@ -71,8 +71,9 @@ pipeline {
 
         stage('Launch new app in DEV env') {
             steps {
+		    // What if this doesn't exist for the first time? Than this won't work as there won't be a dc.
             	sh 'oc project ${DEV_PROJECT}'
-            	sh 'oc set triggers --manual'
+            	sh 'oc set triggers dc/${DEV_PROJECT} --manual'
             /*
                 echo '### Cleaning existing resources in DEV env ###'
                 sh '''
