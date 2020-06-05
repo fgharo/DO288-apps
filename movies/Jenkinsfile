@@ -65,13 +65,16 @@ pipeline {
 
         stage('Launch new app in DEV env') {
             steps {
+            	sh 'oc project {DEV_PROJECT}'
+            /*
                 echo '### Cleaning existing resources in DEV env ###'
                 sh '''
-                        oc delete all -l app=${APP_NAME} -n ${DEV_PROJECT}
+                        oc delete all -l app=${APP_NAME} -n ${DEV_PROJECT} // This delete bc even tho all I am doing here is creating a bc.
                         oc delete all -l build=${APP_NAME} -n ${DEV_PROJECT}
                         sleep 5
                         oc new-build java:8 --name=${APP_NAME} --binary=true -n ${DEV_PROJECT}
                    '''
+                   */
 
                 echo '### Creating a new app in DEV env ###'
                 script {
@@ -83,7 +86,6 @@ pipeline {
                 }
                 // TODO: Create a new OpenShift application based on the ${APP_NAME}:latest image stream
 		sh '''
-			oc project ${DEV_PROJECT}
 			oc new-app ${APP_NAME}:latest
 			oc expose svc ${APP_NAME}
 		     '''
