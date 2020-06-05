@@ -65,7 +65,7 @@ pipeline {
 
         stage('Launch new app in DEV env') {
             steps {
-            	sh 'oc project {DEV_PROJECT}'
+            	sh 'oc project ${DEV_PROJECT}'
             	sh 'oc set triggers --manual'
             /*
                 echo '### Cleaning existing resources in DEV env ###'
