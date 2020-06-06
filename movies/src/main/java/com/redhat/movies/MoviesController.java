@@ -26,6 +26,7 @@ public class MoviesController {
         movies.add(new Movie(6,"The Silence of the Lambs","Drama"));
         movies.add(new Movie(7, "Interstellar","Sci-Fi/Drama"));
         movies.add(new Movie(8, "Avatar","Sci-Fi/Drama"));
+        movies.add(new Movie(9, "Nightmare on Elm Street","Horror"));
 
         return movies;
     }

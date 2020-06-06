@@ -49,7 +49,7 @@ public class MoviesApplicationTests {
 
 		List <Movie> movies = response.getBody();
 		Assert.assertNotNull(movies);
-		Assert.assertEquals(8, movies.size());
+		Assert.assertEquals(9, movies.size());
 		Assert.assertEquals("The Godfather", movies.get(0).getName());
 	}
 
