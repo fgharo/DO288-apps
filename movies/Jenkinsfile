@@ -76,12 +76,10 @@ pipeline {
                 echo '### Rolling out new deployment in dev ###'
                 sh '''
                         oc set triggers dc/movies --manual 
-						oc start-build bc/movies --from-file=target/movies.jar --wait=true --follow=true
+						oc start-build bc/movies --from-file=movies/target/movies.jar --wait=true --follow=true
 						oc rollout latest dc/movies
 						oc set triggers dc/movies --auto
                    '''
-
-                echo '### Creating a new app in DEV env ###'
             }
         }
 
