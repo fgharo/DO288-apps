@@ -74,10 +74,9 @@ pipeline {
                 echo '### Rolling out new deployment in dev ###'
                 sh '''
                 		oc project ${DEV_PROJECT}
-                        oc set triggers dc/movies --manual 
-						oc start-build bc/movies --from-file=movies/target/movies.jar --wait=true --follow=true
-						oc rollout latest dc/movies
-						oc set triggers dc/movies --auto
+                        oc set triggers dc/${APP_NAME} --manual 
+						oc start-build bc/${APP_NAME} --from-file=movies/target/movies.jar --wait=true --follow=true
+						oc rollout latest dc/${APP_NAME}
                    '''
             }
         }
@@ -104,11 +103,11 @@ pipeline {
                 timeout(time: 60, unit: 'MINUTES') {
                     input message: "Promote to Staging?"
                 }
-                script {
-                    openshift.withCluster() {
-			sh 'oc tag ${DEV_PROJECT}/${APP_NAME}:latest ${STAGE_PROJECT}/${APP_NAME}:stage'
-                    }
-                }
+                sh '''
+                	oc project ${STAGE_PROJECT}
+                	oc set triggers dc/${APP_NAME} --manual
+                	oc tag ${DEV_PROJECT}/${APP_NAME}:latest ${STAGE_PROJECT}/${APP_NAME}:stage
+                   '''
             }
         }
 
