@@ -137,5 +137,6 @@ def waitOnRolloutCompletion(project, app){
 	 while (currentNumOfReplicas != expectedNumOfReplicas){
             sleep 5
             currentNumOfReplicas = sh(returnStdout: true, script: "oc get rc ${replication_controller} --template={{.status.readyReplicas}}").trim() 
-         }
+	    echo "${currentNumOfReplicas} vs ${expectedNumOfReplicas}"
+	 }
 }
