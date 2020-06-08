@@ -27,36 +27,36 @@ pipeline {
         stage('Compilation Check') {
             steps {
                 echo '### Checking for compile errors ###'
-		    /*
+		    
                 sh '''
                         cd ${APP_NAME}
                         mvn -s settings.xml -B clean compile
                    '''
-		   */
+		   
             }
         }
 
         stage('Run Unit Tests') {
             steps {
                 echo '### Running unit tests ###'
-		    /*
+		    
                 sh '''
                         cd ${APP_NAME}
                         mvn -s settings.xml -B clean test
                    '''
-		   */
+		   
             }
         }
 
         stage('Static Code Analysis') {
             steps {
                 echo '### Running pmd on code ###'
-		    /*
+		    
                 sh '''
                         cd ${APP_NAME}
                         mvn -s settings.xml -B clean pmd:check
                    '''
-		   */
+		   
             }
         }
 
