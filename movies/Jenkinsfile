@@ -18,6 +18,7 @@ pipeline {
 
         // DO NOT CHANGE THE GLOBAL VARS BELOW THIS LINE
         APP_NAME = "movies"
+        PATH_TO_BINARY_FILE = "movies/target/movies.jar"
     }
 
 
@@ -75,7 +76,7 @@ pipeline {
                 sh '''
                 	oc project ${DEV_PROJECT}
                         oc set triggers dc/${APP_NAME} --manual 
-			oc start-build bc/${APP_NAME} --from-file=movies/target/movies.jar --wait=true --follow=true
+			oc start-build bc/${APP_NAME} --from-file=${PATH_TO_BINARY_FILE} --wait=true --follow=true
 			oc rollout latest dc/${APP_NAME}
                    '''
             }
