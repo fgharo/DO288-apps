@@ -25,7 +25,6 @@ pipeline {
 
         stage('Compilation Check') {
             steps {
-		hi()
                 echo '### Checking for compile errors ###'
 		    /*
                 sh '''
