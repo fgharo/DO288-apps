@@ -130,13 +130,11 @@ def waitOnRolloutCompletion(project, app){
 	 def replication_controller = app + "-" + dc_version 
 
          def currentNumOfReplicas = ""
-	 def expectedNumOfReplicas = ""
+	 def expectedNumOfReplicas = sh(returnStdout: true, script: "oc get rc ${replication_controller} --template={{.status.replicas}}").trim()
 	
 	 echo "Waiting for ReplicationController ${replication_controller} to replicate expected number of replicas."
 	 do{
             sleep 5
-		 
             currentNumOfReplicas = sh(returnStdout: true, script: "oc get rc ${replication_controller} --template={{.status.readyReplicas}}").trim() 
-	    expectedNumOfReplicas = sh(returnStdout: true, script: "oc get rc ${replication_controller} --template={{.status.replicas}}").trim()
          }while (currentNumOfReplicas != expectedNumOfReplicas)
 }
