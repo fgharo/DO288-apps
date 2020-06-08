@@ -1,3 +1,6 @@
+def hi(){
+	echo 'Hello world'
+}
 pipeline {
     options {
         // set a timeout of 60 minutes for this pipeline
@@ -25,6 +28,7 @@ pipeline {
 
         stage('Compilation Check') {
             steps {
+		hello()
                 echo '### Checking for compile errors ###'
 		    /*
                 sh '''
